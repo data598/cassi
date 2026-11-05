@@ -1,0 +1,32 @@
+name: Aperçu Expo
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+      - run: npm ci
+      # Sur une PR : publie l'aperçu et commente un QR code
+      - if: github.event_name == 'pull_request'
+        uses: expo/expo-github-action/preview@v8
+        with:
+          command: eas update --auto --non-interactive
+      # Sur main : publie la branche main
+      - if: github.event_name == 'push'
+        run: eas update --auto --non-interactive
