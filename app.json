@@ -1,13 +1,17 @@
 {
   "expo": {
     "name": "Cassi",
-    "slug": "Cassi",
+    "slug": "cassi",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "userInterfaceStyle": "automatic",
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.data598.cassi",
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "Cassi utilise votre position pour vous situer sur les parcelles."
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -16,7 +20,12 @@
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
       },
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "com.data598.cassi",
+      "permissions": [
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"
